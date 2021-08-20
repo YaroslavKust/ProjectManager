@@ -7,17 +7,28 @@
              xmlns:local="clr-namespace:ProjectManager.UI.Views"
              mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="500">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="MinWidth" Value="20"/>
+            <Setter Property="MinHeight" Value="20"/>
+        </Style>
+    </UserControl.Resources>
     <Grid Background="Blue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="15*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="{Binding ElementName = root, Path = ProjectName}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"/>
-        <Button Content="Добавить задачу" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right"/>
+        <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="2">
+            <Button.Background>
+                <ImageBrush ImageSource="../Sources/Images/add.ico"/>
+            </Button.Background>
+        </Button>
         <ListView ItemsSource="{Binding ElementName = root, Path = Tasks}" Grid.ColumnSpan="2" Grid.Row="1">
             <ListView.View>
                 <GridView>
@@ -25,14 +36,22 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Update"></Button>
+                                <Button>
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="../Sources/Images/update.ico"/>
+                                    </Button.Background>
+                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="Delete"></Button>
+                                <Button>
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="../Sources/Images/delete.ico"/>
+                                    </Button.Background>
+                                </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>

@@ -137,8 +137,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Sources\Images\" />
+    <Resource Include="Sources\Images\add.ico" />
+    <Resource Include="Sources\Images\delete.ico" />
+    <Resource Include="Sources\Images\update.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
