@@ -10,8 +10,9 @@
     <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="MinWidth" Value="20"/>
-            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Background" Value="Transparent"></Setter>
         </Style>
     </UserControl.Resources>
     <Grid Background="Blue">
@@ -23,11 +24,15 @@
             <RowDefinition Height="15*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="{Binding ElementName = root, Path = ProjectName}" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left"/>
+        <TextBlock 
+            Text="{Binding ElementName = root, Path = ProjectName}" 
+            Grid.Column="0" Grid.Row="0" 
+            HorizontalAlignment="Left"
+            FontSize="15"
+            Foreground="White"
+            />
         <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="2">
-            <Button.Background>
-                <ImageBrush ImageSource="../Sources/Images/add.ico"/>
-            </Button.Background>
+                <Image Source="../Sources/Images/add.ico"/>
         </Button>
         <ListView ItemsSource="{Binding ElementName = root, Path = Tasks}" Grid.ColumnSpan="2" Grid.Row="1">
             <ListView.View>
@@ -37,9 +42,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button>
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="../Sources/Images/update.ico"/>
-                                    </Button.Background>
+                                        <Image Source="../Sources/Images/update.ico"/>
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -48,9 +51,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button>
-                                    <Button.Background>
-                                        <ImageBrush ImageSource="../Sources/Images/delete.ico"/>
-                                    </Button.Background>
+                                        <Image Source="../Sources/Images/delete.ico"/>
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
