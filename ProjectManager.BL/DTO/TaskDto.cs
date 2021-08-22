@@ -10,4 +10,11 @@ namespace ProjectManager.BL.DTO
         public int ProgressInPercents { get; set; }
         public int ProjectId { get; set; }
     }
+
+    public enum Priority
+    {
+        High = 1,
+        Normal = 2,
+        Low = 3
+    }
 }

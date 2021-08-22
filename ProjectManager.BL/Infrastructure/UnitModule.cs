@@ -3,11 +3,11 @@ using ProjectManager.DAL.UnitOfWorks;
 
 namespace ProjectManager.BL.Infrastructure
 {
-    public class ServiceModule: NinjectModule
+    public class UnitModule: NinjectModule
     {
         private string _connection;
 
-        public ServiceModule(string connection)
+        public UnitModule(string connection)
         {
             _connection = connection;
         }

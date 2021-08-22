@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Configuration;
 using System.Windows;
+using Ninject;
+using ProjectManager.BL.Infrastructure;
+using ProjectManager.Util;
 
-namespace ProjectManager
+namespace ProjectManager.UI
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            ConfigureContainer();
+            Current.MainWindow.Show();
+        }
+
+        private void ConfigureContainer()
+        {
+            string connection = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
+
+            var serviceModule = new ServiceModule();
+            var unitModule = new UnitModule(connection);
+
+            var container = new StandardKernel(serviceModule, unitModule);
+            Current.MainWindow = container.Get<MainWindow>();
+        }
     }
 }

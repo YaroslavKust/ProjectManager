@@ -53,7 +53,7 @@
   <ItemGroup>
     <Compile Include="DTO\ProjectDto.cs" />
     <Compile Include="DTO\TaskDto.cs" />
-    <Compile Include="Infrastructure\ServiceModule.cs" />
+    <Compile Include="Infrastructure\UnitModule.cs" />
     <Compile Include="Interfaces\IProjectService.cs" />
     <Compile Include="Interfaces\ITaskService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,4 +1,5 @@
-﻿using ProjectManager.DAL.Models;
+﻿using System.Data.Entity;
+using ProjectManager.DAL.Models;
 using ProjectManager.DAL.Repositories;
 
 namespace ProjectManager.DAL.UnitOfWorks
@@ -9,7 +10,7 @@ namespace ProjectManager.DAL.UnitOfWorks
         private IRepository<Project> _projects;
         private IRepository<MyTask> _tasks;
 
-        private readonly ManagerContext _db;
+        private readonly DbContext _db;
 
         public UnitOfWork(string connectionString)
         {

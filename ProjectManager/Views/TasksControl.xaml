@@ -1,5 +1,5 @@
 ﻿<UserControl x:Class="ProjectManager.UI.Views.TasksControl"
-             x:Name="root"
+             x:Name="Root"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -25,7 +25,7 @@
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
         <TextBlock 
-            Text="{Binding ElementName = root, Path = ProjectName}" 
+            Text="{Binding ElementName = Root, Path = ProjectName}" 
             Grid.Column="0" Grid.Row="0" 
             HorizontalAlignment="Left"
             FontSize="15"
@@ -34,10 +34,15 @@
         <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="2">
                 <Image Source="../Sources/Images/add.ico"/>
         </Button>
-        <ListView ItemsSource="{Binding ElementName = root, Path = Tasks}" Grid.ColumnSpan="2" Grid.Row="1">
+        <ListView ItemsSource="{Binding ElementName = Root, Path = Tasks}" Grid.ColumnSpan="2" Grid.Row="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Description}"></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Задача"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="Приоритет"/>
+                    <GridViewColumn 
+                        DisplayMemberBinding="{Binding Path = ProgressInPercents, StringFormat=\{0\}%}"
+                        Header="Прогресс"
+                        />
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>

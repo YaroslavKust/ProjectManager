@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using ProjectManager.Models;
+using ProjectManager.BL.DTO;
 
 namespace ProjectManager.UI.Views
 {
@@ -21,9 +21,9 @@ namespace ProjectManager.UI.Views
             set => SetValue(ProjectNameProperty, value);
         }
 
-        public List<MyTask> Tasks
+        public List<TaskDto> Tasks
         {
-            get => (List<MyTask>)GetValue(TasksProperty);
+            get => (List<TaskDto>)GetValue(TasksProperty);
             set => SetValue(TasksProperty, value);
         }
 
@@ -31,6 +31,6 @@ namespace ProjectManager.UI.Views
             DependencyProperty.Register("ProjectName", typeof(string), typeof(TasksControl));
 
         public static DependencyProperty TasksProperty =
-            DependencyProperty.Register("Tasks", typeof(List<MyTask>), typeof(TasksControl));
+            DependencyProperty.Register("Tasks", typeof(List<TaskDto>), typeof(TasksControl));
     }
 }

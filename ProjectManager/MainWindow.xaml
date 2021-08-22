@@ -1,17 +1,17 @@
-﻿<Window x:Class="ProjectManager.MainWindow"
+﻿<Window x:Class="ProjectManager.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProjectManager"
+        xmlns:local="clr-namespace:ProjectManager.UI"
         xmlns:uc ="clr-namespace:ProjectManager.UI.Views"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="300" MinWidth="500">
     <StackPanel>
-        <uc:TasksControl ProjectName="{Binding Str}" Tasks="{Binding Tasks}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
-        <uc:TasksControl ProjectName="{Binding Str}" Tasks="{Binding Tasks}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
-        <uc:TasksControl ProjectName="{Binding Str}" Tasks="{Binding Tasks}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
-        <uc:TasksControl ProjectName="{Binding Str}" Tasks="{Binding Tasks}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
-        <uc:TasksControl ProjectName="{Binding Str}" Tasks="{Binding Tasks}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
+        <uc:TasksControl ProjectName="{Binding Str}" Tasks ="{Binding Tasks}"  MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
+        <uc:TasksControl ProjectName="{Binding Str}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
+        <uc:TasksControl ProjectName="{Binding Str}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
+        <uc:TasksControl ProjectName="{Binding Str}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
+        <uc:TasksControl ProjectName="{Binding Str}" MinWidth="300" MaxWidth="700" MaxHeight="300"  Margin="10"/>
     </StackPanel>
 </Window>
