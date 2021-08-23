@@ -7,6 +7,7 @@
              xmlns:local="clr-namespace:ProjectManager.UI.Views"
              mc:Ignorable="d"
              d:DesignHeight="150" d:DesignWidth="500">
+
     <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="BorderThickness" Value="0"/>
@@ -15,6 +16,7 @@
             <Setter Property="Background" Value="Transparent"></Setter>
         </Style>
     </UserControl.Resources>
+
     <Grid Background="Blue">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -24,6 +26,7 @@
             <RowDefinition Height="15*"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
+
         <TextBlock 
             Text="{Binding ElementName = Root, Path = ProjectName}" 
             Grid.Column="0" Grid.Row="0" 
@@ -31,7 +34,7 @@
             FontSize="15"
             Foreground="White"
             />
-        <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="2">
+        <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="2" Command="{Binding Add}">
                 <Image Source="../Sources/Images/add.ico"/>
         </Button>
         <ListView ItemsSource="{Binding ElementName = Root, Path = Tasks}" Grid.ColumnSpan="2" Grid.Row="1">
@@ -46,7 +49,7 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button>
+                                <Button Command="{Binding Update}">
                                         <Image Source="../Sources/Images/update.ico"/>
                                 </Button>
                             </DataTemplate>
@@ -55,7 +58,7 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button>
+                                <Button Command="{Binding Remove}">
                                         <Image Source="../Sources/Images/delete.ico"/>
                                 </Button>
                             </DataTemplate>
