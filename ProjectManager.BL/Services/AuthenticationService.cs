@@ -19,9 +19,18 @@ namespace ProjectManager.BL.Services
 
         public async Task<UserDto> AuthorizeAsync(string name, string password)
         {
-            var user = 
-                (await _unit.Users.GetAsync(u => u.Name == name && u.Password == password)).FirstOrDefault();
-            return new UserDto() {Id = user.Id, Name = user.Name};
+            User user;
+
+            try
+            {
+                user = (await _unit.Users.GetAsync(u => u.Name == name && u.Password == password)).First();
+            }
+            catch
+            {
+                throw new Exception();
+            }
+
+            return new UserDto() { Id = user.Id, Name = user.Name };
         }
 
         public async void Register(string name, string password)

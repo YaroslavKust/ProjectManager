@@ -2,7 +2,7 @@
 using ProjectManager.BL.Interfaces;
 using ProjectManager.BL.Services;
 
-namespace ProjectManager.Util
+namespace ProjectManager.UI.Util
 {
     public class ServiceModule: NinjectModule
     {
@@ -10,6 +10,7 @@ namespace ProjectManager.Util
         {
             Bind<IProjectService>().To<ProjectService>();
             Bind<ITaskService>().To<TaskService>();
+            Bind<IAuthenticationService>().To<AuthenticationService>();
         }
     }
 }

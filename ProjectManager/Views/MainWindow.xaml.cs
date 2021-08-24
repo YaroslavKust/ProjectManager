@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows;
 using ProjectManager.BL.DTO;
+using ProjectManager.UI.ViewModels;
 
-namespace ProjectManager.UI
+namespace ProjectManager.UI.Views
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
@@ -15,9 +16,7 @@ namespace ProjectManager.UI
         public MainWindow()
         {
             InitializeComponent();
-            Tasks = new List<TaskDto>() {new TaskDto() {Description = "qwerty", Priority = Priority.High, ProgressInPercents = 10}};
-            Str = "s";
-            DataContext = this;
+            DataContext = new MainWindowViewModel();
         }
     }
 }
