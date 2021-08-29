@@ -40,11 +40,11 @@
         <ListView ItemsSource="{Binding ElementName = Root, Path = Tasks}" Grid.ColumnSpan="2" Grid.Row="1">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Задача"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="Приоритет"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="{DynamicResource TaskDescription}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="{DynamicResource Priority}"/>
                     <GridViewColumn 
                         DisplayMemberBinding="{Binding Path = ProgressInPercents, StringFormat=\{0\}%}"
-                        Header="Прогресс"
+                        Header="{DynamicResource Progress}"
                         />
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>

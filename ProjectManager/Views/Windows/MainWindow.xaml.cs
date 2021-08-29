@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Windows;
-using ProjectManager.BL.DTO;
-using ProjectManager.UI.ViewModels;
 
 namespace ProjectManager.UI.Views
 {
@@ -10,13 +8,14 @@ namespace ProjectManager.UI.Views
     /// </summary>
     public partial class MainWindow : Window
     {
-        public string Str { get; set; }
-        public List<TaskDto> Tasks { get; set; }
-
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowViewModel();
+        }
+
+        private void MainWindow_OnClosed(object sender, EventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

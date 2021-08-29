@@ -6,6 +6,6 @@ namespace ProjectManager.BL.Interfaces
     public interface IAuthenticationService
     {
         Task<UserDto> AuthorizeAsync(string name, string password);
-        void Register(string name, string password);
+        Task RegisterAsync(string name, string password);
     }
 }

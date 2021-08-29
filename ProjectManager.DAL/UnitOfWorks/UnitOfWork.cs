@@ -22,5 +22,15 @@ namespace ProjectManager.DAL.UnitOfWorks
         public IRepository<Project> Projects => _projects ?? (_projects = new Repository<Project>(_db));
 
         public IRepository<MyTask> Tasks => _tasks ?? (_tasks = new Repository<MyTask>(_db));
+
+        public int Save()
+        {
+            return _db.SaveChanges();
+        }
+
+        public void Dispose()
+        {
+            _db.Dispose();
+        }
     }
 }

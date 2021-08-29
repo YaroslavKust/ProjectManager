@@ -8,10 +8,6 @@ namespace ProjectManager.UI.ViewModels
 {
     public class MainWindowViewModel
     {
-        private ProjectDto _selectedProject;
-        public ObservableCollection<ProjectDto> Projects;
-        private TaskDto _selectedTask;
-        public ObservableCollection<TaskDto> Tasks;
         private CultureInfo _selectedLang;
         public IEnumerable<CultureInfo> Languages => LanguageManager.Languages;
 

@@ -1,21 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Globalization;
-using System.Linq;
-using System.Threading;
 using System.Windows;
 using Ninject;
+using ProjectManager.BL.DTO;
 using ProjectManager.BL.Infrastructure;
 using ProjectManager.UI.Util;
+using ProjectManager.UI.ViewModels;
 using ProjectManager.UI.Views;
 
 namespace ProjectManager.UI
 {
     public partial class App : Application
     {
-       
+        public static UserDto ActiveUser { get; set; }
+
+        private IKernel _container;
+        public static IKernel Container { get; private set; }
+
         public App()
         {
             LanguageManager.Languages.Add(new CultureInfo("ru-RU"));
@@ -36,8 +38,15 @@ namespace ProjectManager.UI
             var serviceModule = new ServiceModule();
             var unitModule = new UnitModule(connection);
 
-            var container = new StandardKernel(serviceModule, unitModule);
-            Current.MainWindow = container.Get<MainWindow>();
+            _container = new StandardKernel(serviceModule, unitModule);
+            Container = _container;
+
+            var window = _container.Get<MainWindow>();
+            var a = new MainWindow();
+            var viewmodel = _container.Get<MainWindowViewModel>();
+            window.DataContext = viewmodel;
+            window.Frame.Source = new Uri("../Pages/Authentication.xaml", UriKind.Relative);
+            Current.MainWindow = window;
         }
     }
 }

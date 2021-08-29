@@ -33,10 +33,13 @@ namespace ProjectManager.BL.Services
             return new UserDto() { Id = user.Id, Name = user.Name };
         }
 
-        public async void Register(string name, string password)
+        public async Task RegisterAsync(string name, string password)
         {
             if ((await _unit.Users.GetAsync(u => u.Name == name)).FirstOrDefault() == null)
+            {
                 _unit.Users.Add(new User() {Name = name, Password = password});
+                _unit.Save();
+            }
             else
                 throw new Exception();
         }
