@@ -1,20 +1,36 @@
-﻿using ProjectManager.DAL.Models;
+﻿using System;
+using ProjectManager.DAL.Models;
 
 namespace ProjectManager.BL.DTO
 {
-    public class TaskDto
+    public class TaskDto: NotifyObject
     {
-        public int Id { get; set; }
-        public string Description { get; set; }
-        public Priority Priority { get; set; }
-        public int ProgressInPercents { get; set; }
-        public int ProjectId { get; set; }
-    }
+        private string _description;
+        private int _progressInPercents;
 
-    public enum Priority
-    {
-        High = 1,
-        Normal = 2,
-        Low = 3
+
+        public int Id { get; set; }
+
+        public int ProjectId { get; set; }
+
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                _description = value;
+                OnPropertyChanged(nameof(Description));
+            }
+        }
+
+        public int ProgressInPercents
+        {
+            get => _progressInPercents;
+            set
+            {
+                _progressInPercents = value;
+                OnPropertyChanged(nameof(ProgressInPercents));
+            }
+        }
     }
 }

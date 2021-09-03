@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using System.Windows;
 using Ninject;
 using ProjectManager.BL.Interfaces;
@@ -10,6 +11,7 @@ namespace ProjectManager.UI.ViewModels
     public class AuthenticationViewModel
     {
         private IAuthenticationService _authService;
+        private IMessenger _messenger;
 
         private RelayCommand _authCommand;
 
@@ -19,26 +21,39 @@ namespace ProjectManager.UI.ViewModels
         public AuthenticationViewModel()
         {
             _authService = App.Container.Get<IAuthenticationService>();
+            _messenger = App.Container.Get<IMessenger>();
         }
 
         public RelayCommand AuthCommand
         {
             get
             {
-                return _authCommand ?? (_authCommand = new RelayCommand(async _ =>
+                return _authCommand ?? (_authCommand = new RelayCommand( _ =>
                 {
                     try
                     {
-                        App.ActiveUser = await _authService.AuthorizeAsync(AuthName, AuthPassword);
-                        var win = (MainWindow) Application.Current.MainWindow;
-                        win.Frame.Navigate(new Uri("../Views/Pages/MainPage.xaml", UriKind.Relative));
+                        Auth();
                     }
                     catch
                     {
-                        MessageBox.Show("Неверное имя пользователя или пароль");
+                        _messenger.SendMessage("Не удалось выполнить вход");
                     }
                 }));
             }
+        }
+
+        private async void Auth()
+        {
+            App.ActiveUser = await _authService.AuthorizeAsync(AuthName, AuthPassword);
+
+            if (App.ActiveUser == null)
+            {
+                _messenger.SendMessage("Неверный логин или пароль");
+                return;
+            }
+
+            var win = (MainWindow)Application.Current.MainWindow;
+            win.Frame.Navigate(new Uri("../Views/Pages/MainPage.xaml", UriKind.Relative));
         }
     }
 }

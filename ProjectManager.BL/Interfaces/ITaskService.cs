@@ -9,6 +9,7 @@ namespace ProjectManager.BL.Interfaces
 {
     public interface ITaskService
     {
+        Task<IEnumerable<TaskDto>> GetTasksAsync(Func<TaskDto,bool> f);
         void CreateTask(TaskDto task);
         void UpdateTask(TaskDto task);
         void DeleteTask(TaskDto task);

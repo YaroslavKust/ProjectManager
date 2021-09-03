@@ -1,14 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using ProjectManager.BL.DTO;
+using System.Collections.Generic;
 using System.Globalization;
-using ProjectManager.BL.DTO;
-using ProjectManager.UI.Common;
 
 namespace ProjectManager.UI.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel: BaseViewModel
     {
         private CultureInfo _selectedLang;
+
         public IEnumerable<CultureInfo> Languages => LanguageManager.Languages;
 
         public CultureInfo SelectedLang

@@ -21,10 +21,9 @@
                 helpers:PasswordHelper.Attach="True" 
                 helpers:PasswordHelper.Password="{Binding AuthPassword, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal">
-                <Button 
-                Content="{DynamicResource Enter}" 
-                Command="{Binding AuthCommand}"
-                Width="150" Margin ="5"/>
+                <Button Content="{DynamicResource Enter}" 
+                        Command="{Binding AuthCommand}"
+                        Width="150" Margin ="5"/>
                 <Button 
                     Width="150" Margin ="5">
                     <Hyperlink NavigateUri="Registration.xaml">

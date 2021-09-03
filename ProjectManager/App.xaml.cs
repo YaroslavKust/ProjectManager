@@ -33,10 +33,9 @@ namespace ProjectManager.UI
 
         private void ConfigureContainer()
         {
-            string connection = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
 
             var serviceModule = new ServiceModule();
-            var unitModule = new UnitModule(connection);
+            var unitModule = new UnitModule();
 
             _container = new StandardKernel(serviceModule, unitModule);
             Container = _container;

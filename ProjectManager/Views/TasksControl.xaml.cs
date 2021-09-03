@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,15 +17,24 @@ namespace ProjectManager.UI.Views
             InitializeComponent();
         }
 
-        public string ProjectName
+        public ProjectDto Project
         {
-            get => (string)GetValue(ProjectNameProperty);
-            set => SetValue(ProjectNameProperty, value);
+            get => (ProjectDto)GetValue(ProjectProperty);
+            set => SetValue(ProjectProperty, value);
         }
 
-        public List<TaskDto> Tasks
+        public TaskDto SelectedTask
         {
-            get => (List<TaskDto>)GetValue(TasksProperty);
+            get => (TaskDto)GetValue(SelectedTaskProperty);
+            set{
+                MessageBox.Show("e");
+                SetValue(SelectedTaskProperty, value);
+            }
+        }
+
+        public IEnumerable<TaskDto> Tasks
+        {
+            get => (IEnumerable<TaskDto>)GetValue(TasksProperty);
             set => SetValue(TasksProperty, value);
         }
 
@@ -46,11 +56,14 @@ namespace ProjectManager.UI.Views
             set => SetValue(AddCommandProperty, value);
         }
 
-        public static DependencyProperty ProjectNameProperty = 
-            DependencyProperty.Register("ProjectName", typeof(string), typeof(TasksControl));
+        public static DependencyProperty ProjectProperty = 
+            DependencyProperty.Register("Project", typeof(ProjectDto), typeof(TasksControl));
+
+        public static DependencyProperty SelectedTaskProperty =
+            DependencyProperty.Register("SelectedTask", typeof(TaskDto), typeof(TasksControl));
 
         public static DependencyProperty TasksProperty =
-            DependencyProperty.Register("Tasks", typeof(List<TaskDto>), typeof(TasksControl));
+            DependencyProperty.Register("Tasks", typeof(IEnumerable<TaskDto>), typeof(TasksControl));
 
         public static DependencyProperty UpdateCommandProperty =
             DependencyProperty.Register("Update", typeof(ICommand), typeof(TasksControl));

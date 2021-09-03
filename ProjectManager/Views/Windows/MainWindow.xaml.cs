@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjectManager.UI.Views.Pages;
+using System;
 using System.Windows;
 
 namespace ProjectManager.UI.Views

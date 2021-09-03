@@ -12,9 +12,7 @@ namespace ProjectManager.UI.Util
             Bind<IProjectService>().To<ProjectService>();
             Bind<ITaskService>().To<TaskService>();
             Bind<IAuthenticationService>().To<AuthenticationService>();
-            Bind<AuthenticationViewModel>().ToSelf();
-            Bind<RegistrationViewModel>().ToSelf();
-            Bind<MainPageViewModel>().ToSelf();
+            Bind<IMessenger>().To<DefaultMessenger>();
         }
     }
 }

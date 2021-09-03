@@ -69,7 +69,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="LanguageManager.cs" />
+    <Compile Include="Common\DefaultMessenger.cs" />
+    <Compile Include="Common\IMessenger.cs" />
+    <Compile Include="Common\LanguageManager.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="Views\Helpers\PasswordHelper.cs" />

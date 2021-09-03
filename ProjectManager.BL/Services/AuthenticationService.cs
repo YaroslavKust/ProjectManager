@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using ProjectManager.BL.DTO;
 using ProjectManager.BL.Interfaces;
 using ProjectManager.DAL.Models;
@@ -23,14 +24,14 @@ namespace ProjectManager.BL.Services
 
             try
             {
-                user = (await _unit.Users.GetAsync(u => u.Name == name && u.Password == password)).First();
+                user = await _unit.Users.GetWithProjectsAsync(u => u.Name == name && u.Password == password);
             }
             catch
             {
                 throw new Exception();
             }
 
-            return new UserDto() { Id = user.Id, Name = user.Name };
+            return MapToDto(user);
         }
 
         public async Task RegisterAsync(string name, string password)
@@ -41,7 +42,15 @@ namespace ProjectManager.BL.Services
                 _unit.Save();
             }
             else
-                throw new Exception();
+                throw new TakenNameException();
+        }
+
+        private UserDto MapToDto(User user)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserDto>());
+            var mapper = config.CreateMapper();
+            var userDto = mapper.Map<UserDto>(user);
+            return userDto;
         }
     }
 }

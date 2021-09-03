@@ -6,7 +6,8 @@
     <v:String x:Key="Exit">Exit</v:String>
     <v:String x:Key="TaskDescription">Task</v:String>
     <v:String x:Key="Progress">Progress</v:String>
-    <v:String x:Key="Priority">Priority</v:String>
+    <v:String x:Key="DateBegin">Date begin</v:String>
+    <v:String x:Key="DateEnd">Date end</v:String>
     <v:String x:Key="Authentication">Authentication</v:String>
     <v:String x:Key="Registration">Registration</v:String>
     <v:String x:Key="Register">Register</v:String>
@@ -14,4 +15,6 @@
     <v:String x:Key="Password">Password</v:String>
     <v:String x:Key="ConfirmPassword">Confirm password</v:String>
     <v:String x:Key="Enter">Enter</v:String>
+    <v:String x:Key="UpdateTask">Update task</v:String>
+    <v:String x:Key="Save">save</v:String>
 </ResourceDictionary>

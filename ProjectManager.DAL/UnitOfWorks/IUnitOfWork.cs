@@ -6,8 +6,8 @@ namespace ProjectManager.DAL.UnitOfWorks
 {
     public interface IUnitOfWork: IDisposable
     {
-        IRepository<User> Users { get; }
-        IRepository<Project> Projects { get; }
+        IUserRepository Users { get; }
+        IProjectRepository Projects { get; }
         IRepository<MyTask> Tasks { get; }
         int Save();
     }

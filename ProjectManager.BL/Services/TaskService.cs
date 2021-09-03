@@ -3,6 +3,10 @@ using ProjectManager.BL.DTO;
 using ProjectManager.BL.Interfaces;
 using ProjectManager.DAL.Models;
 using ProjectManager.DAL.UnitOfWorks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjectManager.BL.Services
 {
@@ -15,22 +19,36 @@ namespace ProjectManager.BL.Services
             _unit = unit;
         }
 
+        public async Task<IEnumerable<TaskDto>> GetTasksAsync(Func<TaskDto, bool> f)
+        {
+            var tsks = await _unit.Tasks.GetAsync(t => true);
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<MyTask, TaskDto>());
+            var mapper = config.CreateMapper();
+            var tasks = mapper.Map<List<TaskDto>>(tsks);
+            var res = tasks.Where(f);
+            return res;
+        }
+
         public void CreateTask(TaskDto task)
         {
             var myTask = MapFromDto(task);
             _unit.Tasks.Add(myTask);
+            _unit.Save();
         }
 
         public void UpdateTask(TaskDto task)
         {
             var myTask = MapFromDto(task);
             _unit.Tasks.Update(myTask);
+            _unit.Save();
         }
 
-        public void DeleteTask(TaskDto task)
+        public async void DeleteTask(TaskDto task)
         {
             var myTask = MapFromDto(task);
-            _unit.Tasks.Delete(myTask);
+            var t = await _unit.Tasks.GetByIdAsync(myTask.Id);
+            _unit.Tasks.Delete(t);
+            _unit.Save();
         }
 
         private MyTask MapFromDto(TaskDto taskDto)

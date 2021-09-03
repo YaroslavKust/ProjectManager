@@ -5,8 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager.UI.Views"
         mc:Ignorable="d"
-        Title="TaskSettingsWindow" Height="450" Width="800">
+        Height="170" Width="300" ResizeMode="NoResize">
+    <Window.Resources>
+        <Style TargetType="ComboBox">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="SubmitButton">
+            <Setter Property="Control.Width" Value="100"/>
+            <Setter Property="Control.Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="250">
+            <TextBlock Text="{DynamicResource TaskDescription}"/>
+            <TextBox MinLines="1" MaxLines="3" Text="{Binding Path=Task.Description}"/>
+            <TextBlock Text="{DynamicResource Progress}"/>
+            <StackPanel Orientation="Horizontal">
+                <ComboBox ItemsSource="{Binding Path=Progress}" SelectedItem="{Binding Path=Task.ProgressInPercents}"/>
+                <Label>%</Label>
+            </StackPanel>
+            <Button IsDefault="True" 
+                    Style="{StaticResource SubmitButton}" 
+                    Content="{DynamicResource Save}"
+                    Click="Button_Click"/>
+        </StackPanel>
     </Grid>
 </Window>

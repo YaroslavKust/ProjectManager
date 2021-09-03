@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Input;
 using Ninject;
+using ProjectManager.BL;
 using ProjectManager.BL.Interfaces;
 using ProjectManager.UI.Common;
 
@@ -9,6 +10,7 @@ namespace ProjectManager.UI.ViewModels
     public class RegistrationViewModel
     {
         private IAuthenticationService _authService;
+        private IMessenger _messenger;
 
         private RelayCommand  _registerCommand;
 
@@ -19,6 +21,7 @@ namespace ProjectManager.UI.ViewModels
         public RegistrationViewModel()
         {
             _authService = App.Container.Get<IAuthenticationService>();
+            _messenger = App.Container.Get<IMessenger>();
         }
 
         public RelayCommand RegisterCommand
@@ -34,9 +37,18 @@ namespace ProjectManager.UI.ViewModels
                     }
 
                     Mouse.OverrideCursor = Cursors.Wait;
-                    await _authService.RegisterAsync(RegName, RegPassword);
-                    Mouse.OverrideCursor = Cursors.Arrow;
-                    MessageBox.Show("Регистрация прошла успешно, вы можете перейти на вкладку авторизации и войти в систему");
+                    try
+                    {
+                        await _authService.RegisterAsync(RegName, RegPassword);
+                        Mouse.OverrideCursor = Cursors.Arrow;
+                    }
+                    catch(TakenNameException)
+                    {
+                        Mouse.OverrideCursor = Cursors.Arrow;
+                        _messenger.SendMessage("Имя пользователя уже занято");
+                        return;
+                    }
+                    _messenger.SendMessage("Регистрация прошла успешно, вы можете перейти на вкладку авторизации и войти в систему");
                 }));
             }
         }

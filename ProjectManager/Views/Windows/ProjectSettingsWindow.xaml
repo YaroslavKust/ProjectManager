@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager.UI.Views"
         mc:Ignorable="d"
-        Title="ProjectSettingsWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Height="100" Width="400">
+    <StackPanel>
+        <TextBlock Width="350" Text="Title"/>
+        <TextBox Width="350" Text="{Binding Name}"/>
+        <Button Margin="5" Content="{DynamicResource Save}" Width="100" IsDefault="True" Click="Button_Click"/>
+    </StackPanel>
 </Window>

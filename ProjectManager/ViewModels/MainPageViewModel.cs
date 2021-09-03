@@ -1,7 +1,205 @@
-﻿namespace ProjectManager.UI.ViewModels
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
+using Ninject;
+using ProjectManager.BL.DTO;
+using ProjectManager.BL.Interfaces;
+using ProjectManager.UI.Common;
+using ProjectManager.UI.Views;
+
+namespace ProjectManager.UI.ViewModels
 {
-    public class MainPageViewModel
+    public class MainPageViewModel: INotifyPropertyChanged
     {
-        
+        private UserDto _user = App.ActiveUser;
+
+        private IProjectService _projectService;
+        private ITaskService _taskService;
+        private IMessenger _messenger;
+
+        private RelayCommand _addTask, _updateTask, _removeTask, _addProject, _updateProject, _deleteProject;
+        private ObservableCollection<ProjectDto> _projects;
+        private ProjectDto _currentProject, _selectedProject;
+        private TaskDto _selectedTask;
+
+        public MainPageViewModel()
+        {
+            _projectService = App.Container.Get<IProjectService>();
+            _taskService = App.Container.Get<ITaskService>();
+            _messenger = App.Container.Get<IMessenger>();
+            Projects = _user.Projects;
+        }
+
+        public ObservableCollection<ProjectDto> Projects
+        {
+            get => _projects;
+            set
+            {
+                _projects = value;
+                OnPropertyChanged(nameof(Projects));
+            }
+        }
+
+        public ProjectDto CurrentProject
+        {
+            get => _currentProject;
+            set
+            {
+                _currentProject = value;
+                OnPropertyChanged(nameof(CurrentProject));  
+            }
+        }
+
+        public ProjectDto SelectedProject
+        {
+            get => _selectedProject;
+            set
+            {
+                _selectedProject = value;
+                OnPropertyChanged(nameof(SelectedProject));
+            }
+        }
+
+        public TaskDto SelectedTask
+        {
+            get => _selectedTask;
+            set
+            {
+                _selectedTask = value;
+                OnPropertyChanged(nameof(SelectedTask));
+            }
+        }
+
+        public RelayCommand AddProjectCommand
+        {
+            get
+            {
+                return _addProject ?? (_addProject = new RelayCommand(async _ =>
+                {
+                    var p = new ProjectDto();
+                    var projectSettings = new ProjectSettingsWindow(p);
+                    if(projectSettings.ShowDialog() == true)
+                    {
+                        p.UserId = _user.Id;
+                        _projectService.CreateProject(p);
+                        Projects = new ObservableCollection<ProjectDto>(await _projectService.GetByUserIdAsync(_user.Id));
+                    }
+                }));
+            }
+        }
+
+        public RelayCommand UpdateProjectCommand
+        {
+            get
+            {
+                return _updateProject ?? (_updateProject = new RelayCommand(_ =>
+                {
+                    if (SelectedProject == null)
+                    {
+                        _messenger.SendMessage("Choose record!");
+                        return;
+                    }
+
+                    var projectSettings = new ProjectSettingsWindow(SelectedProject);
+                    projectSettings.ShowDialog();
+                    if (projectSettings.DialogResult == true)
+                        _projectService.UpdateProject(SelectedProject);
+                }
+                ));
+            }
+        }
+
+        public RelayCommand DeleteProjectCommand
+        {
+            get
+            {
+                return _deleteProject ?? (_deleteProject = new RelayCommand(_ =>
+                {
+                    if (SelectedProject == null)
+                    {
+                        _messenger.SendMessage("Choose record!");
+                        return;
+                    }
+
+                    if (_messenger.SendConfirmMessage("Delete record?"))
+                    {
+                        _projectService.DeleteProject(SelectedProject);
+                        Projects.Remove(SelectedProject);
+                    }
+                }));
+            }
+        }
+
+        public RelayCommand AddTaskCommand
+        {
+            get
+            {
+                return _addTask ?? (_addTask = new RelayCommand(async _ =>
+                    {
+                        var t = new TaskDto();
+                        var taskSettings = new TaskSettingsWindow(t);
+                        if(taskSettings.ShowDialog() == true) 
+                        {
+                            t.ProjectId = CurrentProject.Id;
+                            _taskService.CreateTask(t);
+                            CurrentProject.Tasks =
+                            new ObservableCollection<TaskDto>
+                            (await _taskService.GetTasksAsync(ts => ts.ProjectId == CurrentProject.Id));
+
+                        } 
+                    }
+                ));
+            }
+        }
+
+        public RelayCommand UpdateTaskCommand
+        {
+            get
+            {
+                return _updateTask ?? (_updateTask = new RelayCommand(_ =>
+                {
+                    if(SelectedTask == null)
+                    {
+                        _messenger.SendMessage("Choose record!");
+                        return;
+                    }
+
+                    var taskSettings = new TaskSettingsWindow(SelectedTask);
+                    taskSettings.ShowDialog();
+                    if (taskSettings.DialogResult == true)
+                        _taskService.UpdateTask(SelectedTask);
+                }
+                ));
+            }
+        }
+
+        public RelayCommand RemoveTaskCommand
+        {
+            get
+            {
+                return _removeTask ?? (_removeTask = new RelayCommand(_ =>
+                {
+                    if (SelectedTask == null)
+                    {
+                        _messenger.SendMessage("Choose record!");
+                        return;
+                    }
+
+                    if(_messenger.SendConfirmMessage("Delete record?"))
+                    {
+                        _taskService.DeleteTask(SelectedTask);
+                        CurrentProject.Tasks.Remove(SelectedTask);
+                    }   
+                }));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

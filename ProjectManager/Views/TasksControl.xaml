@@ -11,8 +11,10 @@
     <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="BorderThickness" Value="0"/>
-            <Setter Property="Width" Value="20"/>
-            <Setter Property="Height" Value="20"/>
+            <Setter Property="MinWidth" Value="20"/>
+            <Setter Property="MinHeight" Value="20"/>
+            <Setter Property="MaxWidth" Value="30"/>
+            <Setter Property="MaxHeight" Value="30"/>
             <Setter Property="Background" Value="Transparent"></Setter>
         </Style>
     </UserControl.Resources>
@@ -23,34 +25,41 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
+            <RowDefinition MinHeight="30" MaxHeight="60"/>
             <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock 
-            Text="{Binding ElementName = Root, Path = ProjectName}" 
-            Grid.Column="0" Grid.Row="0" 
-            HorizontalAlignment="Left"
-            FontSize="15"
-            Foreground="White"
-            />
-        <Button Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" Margin="2" Command="{Binding Add}">
+        <TextBlock Text="{Binding ElementName = Root, Path = Project.Name}"
+                   Grid.Column="0" Grid.Row="0" 
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   FontSize="20"
+                   Foreground="White"/>
+        <Button Grid.Column="1" 
+                Grid.Row="0" 
+                HorizontalAlignment="Right" 
+                Margin="2" 
+                Command="{Binding ElementName = Root, Path = Add}">
                 <Image Source="../Sources/Images/add.ico"/>
         </Button>
-        <ListView ItemsSource="{Binding ElementName = Root, Path = Tasks}" Grid.ColumnSpan="2" Grid.Row="1">
+        <ListView ItemsSource="{Binding ElementName = Root, Path = Tasks}" 
+                  Grid.ColumnSpan="2" 
+                  Grid.Row="1"
+                  SelectedItem="{Binding ElementName= Root, Path = SelectedTask}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="{DynamicResource TaskDescription}"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Priority}" Header="{DynamicResource Priority}"/>
-                    <GridViewColumn 
-                        DisplayMemberBinding="{Binding Path = ProgressInPercents, StringFormat=\{0\}%}"
-                        Header="{DynamicResource Progress}"
-                        />
+                    <GridViewColumn DisplayMemberBinding="{Binding DateBegin}" Header="{DynamicResource DateBegin}"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding DateEnd}" Header="{DynamicResource DateEnd}"/>
+
+                    <GridViewColumn DisplayMemberBinding="{Binding Path = ProgressInPercents, StringFormat=\{0\}%}" 
+                                    Header="{DynamicResource Progress}"/>
+
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding Update}">
-                                        <Image Source="../Sources/Images/update.ico"/>
+                                <Button Command="{Binding ElementName=Root, Path=Update}">
+                                    <Image Source="../Sources/Images/update.ico"/>
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -58,12 +67,13 @@
                     <GridViewColumn>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding Remove}">
-                                        <Image Source="../Sources/Images/delete.ico"/>
+                                <Button Command="{Binding ElementName=Root, Path=Remove}">
+                                    <Image Source="../Sources/Images/delete.ico"/>
                                 </Button>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
                 </GridView>
             </ListView.View>
         </ListView>

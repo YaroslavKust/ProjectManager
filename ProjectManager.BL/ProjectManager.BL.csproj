@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\NotifyObject.cs" />
     <Compile Include="DTO\ProjectDto.cs" />
     <Compile Include="DTO\TaskDto.cs" />
     <Compile Include="DTO\UserDto.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\ProjectService.cs" />
     <Compile Include="Services\TaskService.cs" />
+    <Compile Include="Exceptions\TakenNameException.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ProjectManager.DAL\ProjectManager.DAL.csproj">

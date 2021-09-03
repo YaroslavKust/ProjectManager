@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using ProjectManager.BL.DTO;
@@ -20,10 +20,10 @@ namespace ProjectManager.BL.Services
 
         public async Task<IEnumerable<ProjectDto>> GetByUserIdAsync(int userId)
         {
-            var projects = (await _unit.Users.GetByIdAsync(userId)).Projects;
+            var projects = await _unit.Projects.GetWithTasksAsync(p => p.UserId == userId);
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>());
             var mapper = config.CreateMapper();
-            var projectsDto = mapper.Map<List<ProjectDto>>(projects);
+            var projectsDto = mapper.Map<IEnumerable<ProjectDto>>(projects);
 
             return projectsDto;
         }
@@ -32,25 +32,33 @@ namespace ProjectManager.BL.Services
         {
             var project = MapFromDto(projectDto);
             _unit.Projects.Update(project);
+            _unit.Save();
         }
 
         public void CreateProject(ProjectDto projectDto)
         {
             var project = MapFromDto(projectDto);
             _unit.Projects.Add(project);
+            _unit.Save();
         }
 
-        public void DeleteProject(ProjectDto projectDto)
+        public async void DeleteProject(ProjectDto projectDto)
         {
-            var project = MapFromDto(projectDto);
+            var project =await _unit.Projects.GetByIdAsync(projectDto.Id);
             _unit.Projects.Delete(project);
+            _unit.Save();
         }
 
         private Project MapFromDto(ProjectDto projectDto)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>());
+            var mapt = new MapperConfiguration(cfg => cfg.CreateMap<TaskDto, MyTask>());
+            var tmap = mapt.CreateMapper();
+
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<ProjectDto, Project>().
+            ForMember(p=>p.Tasks, opt => opt.MapFrom(x => tmap.Map<List<MyTask>>(x.Tasks.ToList()))));
             var mapper = config.CreateMapper();
             var project = mapper.Map<Project>(projectDto);
+
             return project;
         }
     }

@@ -5,40 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager.UI"
         xmlns:uc ="clr-namespace:ProjectManager.UI.Views"
+        xmlns:vm="clr-namespace:ProjectManager.UI.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="300" MinWidth="500"
         Closed="MainWindow_OnClosed">
-    <Window.Resources>
-        <Style TargetType="uc:TasksControl">
-            <Setter Property="Margin" Value="10"></Setter>
-        </Style>
-    </Window.Resources>
+    <Window.DataContext>
+        <vm:MainWindowViewModel/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="61*"/>
-                <ColumnDefinition Width="621*"/>
-                <ColumnDefinition Width="80*"/>
-            </Grid.ColumnDefinitions>
-            <ComboBox 
-                Grid.Column="0" 
-                Margin="5,5,8.8,5.4" 
-                ItemsSource="{Binding Languages}" 
-                SelectedItem="{Binding SelectedLang}" 
-                DisplayMemberPath="Name"
-            />
-            <TextBlock 
-                Grid.Column="1" 
-                HorizontalAlignment="Right" 
-                VerticalAlignment="Center" 
-                Margin="0,5,6.6,5.4"
-                />
-            <Button Grid.Column="2" Margin="3.4,5,4.6,5.4" Content="{DynamicResource Exit}"></Button>
-        </Grid>
+        <ComboBox Grid.Row="0" 
+                  Width="100"
+                  Margin="5"
+                  HorizontalAlignment="Left" 
+                  ItemsSource="{Binding Languages}" 
+                  SelectedItem="{Binding SelectedLang}" 
+                  DisplayMemberPath="Name"/>
         <Frame x:Name="Frame" Grid.Row="1"/>
     </Grid>
 </Window>
