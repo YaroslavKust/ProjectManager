@@ -4,6 +4,8 @@ using Ninject;
 using ProjectManager.BL;
 using ProjectManager.BL.Interfaces;
 using ProjectManager.UI.Common;
+using ProjectManager.UI.Views;
+using ProjectManager.UI.Views.Pages;
 
 namespace ProjectManager.UI.ViewModels
 {
@@ -48,7 +50,9 @@ namespace ProjectManager.UI.ViewModels
                         _messenger.SendMessage("Имя пользователя уже занято");
                         return;
                     }
-                    _messenger.SendMessage("Регистрация прошла успешно, вы можете перейти на вкладку авторизации и войти в систему");
+                    _messenger.SendMessage("Регистрация прошла успешно");
+                    var win = (MainWindow)Application.Current.MainWindow;
+                    win.Frame.Navigate(new Authentication());
                 }));
             }
         }

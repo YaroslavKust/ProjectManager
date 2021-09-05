@@ -5,6 +5,7 @@ using Ninject;
 using ProjectManager.BL.Interfaces;
 using ProjectManager.UI.Common;
 using ProjectManager.UI.Views;
+using ProjectManager.UI.Views.Pages;
 
 namespace ProjectManager.UI.ViewModels
 {
@@ -44,16 +45,16 @@ namespace ProjectManager.UI.ViewModels
 
         private async void Auth()
         {
-            App.ActiveUser = await _authService.AuthorizeAsync(AuthName, AuthPassword);
+            var user  = await _authService.AuthorizeAsync(AuthName, AuthPassword);
 
-            if (App.ActiveUser == null)
+            if (user == null)
             {
                 _messenger.SendMessage("Неверный логин или пароль");
                 return;
             }
 
             var win = (MainWindow)Application.Current.MainWindow;
-            win.Frame.Navigate(new Uri("../Views/Pages/MainPage.xaml", UriKind.Relative));
+            win.Frame.Navigate(new MainPage(user));
         }
     }
 }

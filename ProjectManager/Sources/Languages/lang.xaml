@@ -6,8 +6,6 @@
     <v:String x:Key="Exit">Exit</v:String>
     <v:String x:Key="TaskDescription">Task</v:String>
     <v:String x:Key="Progress">Progress</v:String>
-    <v:String x:Key="DateBegin">Date begin</v:String>
-    <v:String x:Key="DateEnd">Date end</v:String>
     <v:String x:Key="Authentication">Authentication</v:String>
     <v:String x:Key="Registration">Registration</v:String>
     <v:String x:Key="Register">Register</v:String>

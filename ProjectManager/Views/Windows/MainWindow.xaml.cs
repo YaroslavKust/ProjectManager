@@ -1,5 +1,7 @@
 ﻿using ProjectManager.UI.Views.Pages;
 using System;
+using System.Globalization;
+using System.Threading;
 using System.Windows;
 
 namespace ProjectManager.UI.Views
@@ -11,6 +13,7 @@ namespace ProjectManager.UI.Views
     {
         public MainWindow()
         {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(Properties.Settings.Default.Language);
             InitializeComponent();
         }
 

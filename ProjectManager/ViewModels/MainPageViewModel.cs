@@ -11,9 +11,9 @@ using ProjectManager.UI.Views;
 
 namespace ProjectManager.UI.ViewModels
 {
-    public class MainPageViewModel: INotifyPropertyChanged
+    public class MainPageViewModel: BaseViewModel
     {
-        private UserDto _user = App.ActiveUser;
+        private UserDto _user;
 
         private IProjectService _projectService;
         private ITaskService _taskService;
@@ -24,11 +24,12 @@ namespace ProjectManager.UI.ViewModels
         private ProjectDto _currentProject, _selectedProject;
         private TaskDto _selectedTask;
 
-        public MainPageViewModel()
+        public MainPageViewModel(UserDto user)
         {
             _projectService = App.Container.Get<IProjectService>();
             _taskService = App.Container.Get<ITaskService>();
             _messenger = App.Container.Get<IMessenger>();
+            _user = user;
             Projects = _user.Projects;
         }
 
@@ -98,7 +99,7 @@ namespace ProjectManager.UI.ViewModels
                 {
                     if (SelectedProject == null)
                     {
-                        _messenger.SendMessage("Choose record!");
+                        _messenger.SendMessage(Properties.Resources.ChooseRecord);
                         return;
                     }
 
@@ -119,11 +120,11 @@ namespace ProjectManager.UI.ViewModels
                 {
                     if (SelectedProject == null)
                     {
-                        _messenger.SendMessage("Choose record!");
+                        _messenger.SendMessage(Properties.Resources.ChooseRecord);
                         return;
                     }
 
-                    if (_messenger.SendConfirmMessage("Delete record?"))
+                    if (_messenger.SendConfirmMessage(Properties.Resources.DelRecordConfirm))
                     {
                         _projectService.DeleteProject(SelectedProject);
                         Projects.Remove(SelectedProject);
@@ -138,8 +139,15 @@ namespace ProjectManager.UI.ViewModels
             {
                 return _addTask ?? (_addTask = new RelayCommand(async _ =>
                     {
+                        if (CurrentProject == null)
+                        {
+                            _messenger.SendMessage(Properties.Resources.ChooseRecord);
+                            return;
+                        }
+
                         var t = new TaskDto();
                         var taskSettings = new TaskSettingsWindow(t);
+
                         if(taskSettings.ShowDialog() == true) 
                         {
                             t.ProjectId = CurrentProject.Id;
@@ -147,7 +155,6 @@ namespace ProjectManager.UI.ViewModels
                             CurrentProject.Tasks =
                             new ObservableCollection<TaskDto>
                             (await _taskService.GetTasksAsync(ts => ts.ProjectId == CurrentProject.Id));
-
                         } 
                     }
                 ));
@@ -162,7 +169,7 @@ namespace ProjectManager.UI.ViewModels
                 {
                     if(SelectedTask == null)
                     {
-                        _messenger.SendMessage("Choose record!");
+                        _messenger.SendMessage(Properties.Resources.ChooseRecord);
                         return;
                     }
 
@@ -183,23 +190,17 @@ namespace ProjectManager.UI.ViewModels
                 {
                     if (SelectedTask == null)
                     {
-                        _messenger.SendMessage("Choose record!");
+                        _messenger.SendMessage(Properties.Resources.ChooseRecord);
                         return;
                     }
 
-                    if(_messenger.SendConfirmMessage("Delete record?"))
+                    if(_messenger.SendConfirmMessage(Properties.Resources.DelRecordConfirm))
                     {
                         _taskService.DeleteTask(SelectedTask);
                         CurrentProject.Tasks.Remove(SelectedTask);
                     }   
                 }));
             }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
     }
 }

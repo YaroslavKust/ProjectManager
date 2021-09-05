@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using ProjectManager.BL.DTO;
+using ProjectManager.UI.ViewModels;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace ProjectManager.UI.Views.Pages
 {
@@ -20,9 +9,10 @@ namespace ProjectManager.UI.Views.Pages
     /// </summary>
     public partial class MainPage : Page
     {
-        public MainPage()
+        public MainPage(UserDto user)
         {
             InitializeComponent();
+            DataContext = new MainPageViewModel(user);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Globalization;
+using System.Threading;
 using System.Windows;
 using Ninject;
 using ProjectManager.BL.DTO;
@@ -13,17 +14,12 @@ namespace ProjectManager.UI
 {
     public partial class App : Application
     {
-        public static UserDto ActiveUser { get; set; }
-
         private IKernel _container;
         public static IKernel Container { get; private set; }
 
-        public App()
+        App()
         {
-            LanguageManager.Languages.Add(new CultureInfo("ru-RU"));
-            LanguageManager.Languages.Add(new CultureInfo("en-US"));
         }
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
