@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Threading.Tasks;
 using ProjectManager.DAL.Models;
 using ProjectManager.DAL.Repositories;
 
@@ -23,9 +24,9 @@ namespace ProjectManager.DAL.UnitOfWorks
 
         public IRepository<MyTask> Tasks => _tasks ?? (_tasks = new Repository<MyTask>(_db));
 
-        public int Save()
+        public Task<int> SaveAsync()
         {
-            return _db.SaveChanges();
+            return _db.SaveChangesAsync();
         }
 
         public void Dispose()

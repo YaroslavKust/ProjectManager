@@ -39,7 +39,7 @@ namespace ProjectManager.BL.Services
             if ((await _unit.Users.GetAsync(u => u.Name == name)).FirstOrDefault() == null)
             {
                 _unit.Users.Add(new User() {Name = name, Password = password});
-                _unit.Save();
+                await _unit.SaveAsync();
             }
             else
                 throw new TakenNameException();

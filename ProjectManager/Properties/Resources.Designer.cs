@@ -257,5 +257,23 @@ namespace ProjectManager.UI.Properties {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Name is too short.
+        /// </summary>
+        public static string TooShortName {
+            get {
+                return ResourceManager.GetString("TooShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password is too short.
+        /// </summary>
+        public static string TooShortPassword {
+            get {
+                return ResourceManager.GetString("TooShortPassword", resourceCulture);
+            }
+        }
     }
 }

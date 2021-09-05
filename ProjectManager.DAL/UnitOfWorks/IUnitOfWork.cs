@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ProjectManager.DAL.Models;
 using ProjectManager.DAL.Repositories;
 
@@ -9,6 +10,6 @@ namespace ProjectManager.DAL.UnitOfWorks
         IUserRepository Users { get; }
         IProjectRepository Projects { get; }
         IRepository<MyTask> Tasks { get; }
-        int Save();
+        Task<int> SaveAsync();
     }
 }

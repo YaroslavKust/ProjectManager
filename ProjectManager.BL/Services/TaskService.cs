@@ -33,14 +33,14 @@ namespace ProjectManager.BL.Services
         {
             var myTask = MapFromDto(task);
             _unit.Tasks.Add(myTask);
-            _unit.Save();
+            _unit.SaveAsync();
         }
 
         public void UpdateTask(TaskDto task)
         {
             var myTask = MapFromDto(task);
             _unit.Tasks.Update(myTask);
-            _unit.Save();
+            _unit.SaveAsync();
         }
 
         public async void DeleteTask(TaskDto task)
@@ -48,7 +48,7 @@ namespace ProjectManager.BL.Services
             var myTask = MapFromDto(task);
             var t = await _unit.Tasks.GetByIdAsync(myTask.Id);
             _unit.Tasks.Delete(t);
-            _unit.Save();
+            _unit.SaveAsync();
         }
 
         private MyTask MapFromDto(TaskDto taskDto)

@@ -32,21 +32,21 @@ namespace ProjectManager.BL.Services
         {
             var project = MapFromDto(projectDto);
             _unit.Projects.Update(project);
-            _unit.Save();
+            _unit.SaveAsync();
         }
 
         public void CreateProject(ProjectDto projectDto)
         {
             var project = MapFromDto(projectDto);
             _unit.Projects.Add(project);
-            _unit.Save();
+            _unit.SaveAsync();
         }
 
         public async void DeleteProject(ProjectDto projectDto)
         {
             var project =await _unit.Projects.GetByIdAsync(projectDto.Id);
             _unit.Projects.Delete(project);
-            _unit.Save();
+            _unit.SaveAsync();
         }
 
         private Project MapFromDto(ProjectDto projectDto)

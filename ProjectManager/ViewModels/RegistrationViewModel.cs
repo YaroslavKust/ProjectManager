@@ -38,6 +38,18 @@ namespace ProjectManager.UI.ViewModels
                         return;
                     }
 
+                    if (RegName.Length < 4)
+                    {
+                        _messenger.SendMessage(Properties.Resources.TooShortName);
+                        return;
+                    }
+
+                    if(RegPassword.Length < 4)
+                    {
+                        _messenger.SendMessage(Properties.Resources.TooShortPassword);
+                        return;
+                    }
+
                     Mouse.OverrideCursor = Cursors.Wait;
                     try
                     {
