@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.Reflection;
 using System.Windows;
 
 namespace ProjectManager.UI.ViewModels
@@ -24,9 +23,17 @@ namespace ProjectManager.UI.ViewModels
             get => _selectedLang;
             set
             {
+                if (value.Name == _selectedLang.Name) return;
+
                 _selectedLang = value;
                 LanguageManager.Language = value;
-                
+
+                if (_messenger.SendConfirmMessage(Properties.Resources.RestartAppConfirm))
+                {
+                    Process.Start(Process.GetCurrentProcess().MainModule.FileName);
+                    Application.Current.Shutdown();
+                }
+                    
             }
         }
     }

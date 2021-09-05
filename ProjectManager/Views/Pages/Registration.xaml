@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjectManager.UI.Views.Pages"
+      xmlns:p="clr-namespace:ProjectManager.UI.Properties"
       xmlns:helpers="clr-namespace:ProjectManager.UI.Views.Helpers"
       xmlns:vm="clr-namespace:ProjectManager.UI.ViewModels"
       mc:Ignorable="d" 
@@ -14,18 +15,18 @@
     </Page.DataContext>
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{DynamicResource Login}"/>
+            <TextBlock Text="{x:Static p:Resources.Login}"/>
             <TextBox Text="{Binding RegName}"/>
-            <TextBlock Text="{DynamicResource Password}"/>
+            <TextBlock Text="{x:Static p:Resources.Password}"/>
             <PasswordBox 
                 helpers:PasswordHelper.Attach="True" 
                 helpers:PasswordHelper.Password="{Binding RegPassword, Mode=TwoWay}"/>
-            <TextBlock Text="{DynamicResource ConfirmPassword}"/>
+            <TextBlock Text="{x:Static p:Resources.ConfirmPassword}"/>
             <PasswordBox
                 helpers:PasswordHelper.Attach="True" 
                 helpers:PasswordHelper.Password="{Binding ConfirmedPassword, Mode=TwoWay}"/>
             <Button 
-                Content="{DynamicResource Register}" 
+                Content="{x:Static p:Resources.Register}" 
                 Command="{Binding RegisterCommand}"
                 Width="300" Margin ="5"/>
         </StackPanel>

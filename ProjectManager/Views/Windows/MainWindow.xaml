@@ -4,10 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager.UI"
-        xmlns:uc ="clr-namespace:ProjectManager.UI.Views"
+        xmlns:p="clr-namespace:ProjectManager.UI.Properties"
         xmlns:vm="clr-namespace:ProjectManager.UI.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="300" MinWidth="500"
+        Title="{x:Static p:Resources.ProjectManager}" MinHeight="300" MinWidth="500"
         Closed="MainWindow_OnClosed">
     <Window.DataContext>
         <vm:MainWindowViewModel/>

@@ -34,7 +34,7 @@ namespace ProjectManager.UI.ViewModels
                 {
                     if (ConfirmedPassword != RegPassword)
                     {
-                        MessageBox.Show("Пароли не совпадают");
+                        MessageBox.Show(Properties.Resources.DifferentPasswords);
                         return;
                     }
 
@@ -47,10 +47,10 @@ namespace ProjectManager.UI.ViewModels
                     catch(TakenNameException)
                     {
                         Mouse.OverrideCursor = Cursors.Arrow;
-                        _messenger.SendMessage("Имя пользователя уже занято");
+                        _messenger.SendMessage(Properties.Resources.NameAlreadyUsed);
                         return;
                     }
-                    _messenger.SendMessage("Регистрация прошла успешно");
+                    _messenger.SendMessage(Properties.Resources.SuccessRegistration);
                     var win = (MainWindow)Application.Current.MainWindow;
                     win.Frame.Navigate(new Authentication());
                 }));

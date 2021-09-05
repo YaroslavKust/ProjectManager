@@ -37,7 +37,7 @@ namespace ProjectManager.UI.ViewModels
                     }
                     catch
                     {
-                        _messenger.SendMessage("Не удалось выполнить вход");
+                        _messenger.SendMessage(Properties.Resources.ErrorOfenter);
                     }
                 }));
             }
@@ -49,7 +49,7 @@ namespace ProjectManager.UI.ViewModels
 
             if (user == null)
             {
-                _messenger.SendMessage("Неверный логин или пароль");
+                _messenger.SendMessage(Properties.Resources.InvalidLoginOrPassword);
                 return;
             }
 

@@ -91,20 +91,9 @@
     <Compile Include="Views\Windows\ProjectSettingsWindow.xaml.cs">
       <DependentUpon>ProjectSettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\TasksControl.xaml.cs">
-      <DependentUpon>TasksControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Windows\TaskSettingsWindow.xaml.cs">
       <DependentUpon>TaskSettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="Sources\Languages\lang.ru-RU.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Sources\Languages\lang.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Pages\Authentication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,10 +119,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\Windows\ProjectSettingsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\TasksControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -120,7 +120,67 @@
   <data name="ChooseRecord" xml:space="preserve">
     <value>Choose record</value>
   </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
   <data name="DelRecordConfirm" xml:space="preserve">
     <value>Delete record?</value>
+  </data>
+  <data name="DifferentPasswords" xml:space="preserve">
+    <value>Password missmatch</value>
+  </data>
+  <data name="Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="ErrorOfenter" xml:space="preserve">
+    <value>Error of enter</value>
+  </data>
+  <data name="InvalidLoginOrPassword" xml:space="preserve">
+    <value>Invalid login or password</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="NameAlreadyUsed" xml:space="preserve">
+    <value>Name is already used</value>
+  </data>
+  <data name="NewProject" xml:space="preserve">
+    <value>New project</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Progress" xml:space="preserve">
+    <value>Progress</value>
+  </data>
+  <data name="ProjectManager" xml:space="preserve">
+    <value>Project manager</value>
+  </data>
+  <data name="Projects" xml:space="preserve">
+    <value>Projects</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="RestartAppConfirm" xml:space="preserve">
+    <value>Changes will be confirmed at next start of application. Do you want restart it right now?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SuccessRegistration" xml:space="preserve">
+    <value>Registration completed successfully!</value>
+  </data>
+  <data name="TaskDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Tasks" xml:space="preserve">
+    <value>Tasks</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
   </data>
 </root>

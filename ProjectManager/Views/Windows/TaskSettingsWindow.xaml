@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectManager.UI.Views"
+        xmlns:p="clr-namespace:ProjectManager.UI.Properties"
         mc:Ignorable="d"
         Height="170" Width="300" ResizeMode="NoResize">
     <Window.Resources>
@@ -18,16 +19,16 @@
     </Window.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="250">
-            <TextBlock Text="{DynamicResource TaskDescription}"/>
+            <TextBlock Text="{x:Static p:Resources.TaskDescription}"/>
             <TextBox MinLines="1" MaxLines="3" Text="{Binding Path=Task.Description}"/>
-            <TextBlock Text="{DynamicResource Progress}"/>
+            <TextBlock Text="{x:Static p:Resources.Progress}"/>
             <StackPanel Orientation="Horizontal">
                 <ComboBox ItemsSource="{Binding Path=Progress}" SelectedItem="{Binding Path=Task.ProgressInPercents}"/>
                 <Label>%</Label>
             </StackPanel>
             <Button IsDefault="True" 
                     Style="{StaticResource SubmitButton}" 
-                    Content="{DynamicResource Save}"
+                    Content="{x:Static p:Resources.Save}"
                     Click="Button_Click"/>
         </StackPanel>
     </Grid>

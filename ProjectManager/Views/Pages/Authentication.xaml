@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:ProjectManager.UI.Views.Pages"
       xmlns:vm="clr-namespace:ProjectManager.UI.ViewModels"
+      xmlns:p="clr-namespace:ProjectManager.UI.Properties"
       xmlns:helpers="clr-namespace:ProjectManager.UI.Views.Helpers"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
@@ -14,20 +15,20 @@
     </Page.DataContext>
     <Grid>
         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="{DynamicResource Login}"/>
+            <TextBlock Text="{x:Static p:Resources.Login}"/>
             <TextBox Text="{Binding AuthName}"/>
-            <TextBlock Text="{DynamicResource Password}"/>
+            <TextBlock Text="{x:Static p:Resources.Password}"/>
             <PasswordBox 
                 helpers:PasswordHelper.Attach="True" 
                 helpers:PasswordHelper.Password="{Binding AuthPassword, Mode=TwoWay}"/>
             <StackPanel Orientation="Horizontal">
-                <Button Content="{DynamicResource Enter}" 
+                <Button Content="{x:Static p:Resources.Enter}" 
                         Command="{Binding AuthCommand}"
                         Width="150" Margin ="5"/>
                 <Button 
                     Width="150" Margin ="5">
                     <Hyperlink NavigateUri="Registration.xaml">
-                        <TextBlock Text="{DynamicResource Registration}"/>
+                        <TextBlock Text="{x:Static p:Resources.Registration}"/>
                     </Hyperlink>
                 </Button>
             </StackPanel>
