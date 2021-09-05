@@ -38,8 +38,6 @@ namespace ProjectManager.UI
 
             var window = _container.Get<MainWindow>();
             var a = new MainWindow();
-            var viewmodel = _container.Get<MainWindowViewModel>();
-            window.DataContext = viewmodel;
             window.Frame.Source = new Uri("../Pages/Authentication.xaml", UriKind.Relative);
             Current.MainWindow = window;
         }

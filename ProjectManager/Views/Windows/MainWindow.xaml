@@ -9,9 +9,6 @@
         mc:Ignorable="d"
         Title="{x:Static p:Resources.ProjectManager}" MinHeight="300" MinWidth="500"
         Closed="MainWindow_OnClosed">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
