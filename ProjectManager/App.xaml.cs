@@ -17,9 +17,6 @@ namespace ProjectManager.UI
         private IKernel _container;
         public static IKernel Container { get; private set; }
 
-        App()
-        {
-        }
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

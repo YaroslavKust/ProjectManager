@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -11,16 +12,22 @@ namespace ProjectManager.BL.Services
 {
     public class ProjectService: IProjectService
     {
-        private IUnitOfWork _unit;
+        private Func<IUnitOfWork> _unitFactory;
 
-        public ProjectService(IUnitOfWork unit)
+        public ProjectService(Func<IUnitOfWork> unitFactory)
         {
-            _unit = unit;
+            _unitFactory = unitFactory;
         }
 
         public async Task<IEnumerable<ProjectDto>> GetByUserIdAsync(int userId)
         {
-            var projects = await _unit.Projects.GetWithTasksAsync(p => p.UserId == userId);
+            IEnumerable<Project> projects;
+
+            using(var unit = _unitFactory())
+            {
+                projects = await unit.Projects.GetWithTasksAsync(p => p.UserId == userId);
+            }
+            
             var config = new MapperConfiguration(cfg => cfg.CreateMap<Project, ProjectDto>());
             var mapper = config.CreateMapper();
             var projectsDto = mapper.Map<IEnumerable<ProjectDto>>(projects);
@@ -28,25 +35,37 @@ namespace ProjectManager.BL.Services
             return projectsDto;
         }
 
-        public void UpdateProject(ProjectDto projectDto)
+        public async Task UpdateProjectAsync(ProjectDto projectDto)
         {
             var project = MapFromDto(projectDto);
-            _unit.Projects.Update(project);
-            _unit.SaveAsync();
+
+            using(var unit = _unitFactory())
+            {
+                unit.Projects.Update(project);
+                await unit.SaveAsync();
+            }
+            
         }
 
-        public void CreateProject(ProjectDto projectDto)
+        public async Task CreateProjectAsync(ProjectDto projectDto)
         {
             var project = MapFromDto(projectDto);
-            _unit.Projects.Add(project);
-            _unit.SaveAsync();
+
+            using(var unit = _unitFactory())
+            {
+                unit.Projects.Add(project);
+                await unit.SaveAsync();
+            }
         }
 
-        public async void DeleteProject(ProjectDto projectDto)
+        public async Task DeleteProjectAsync(ProjectDto projectDto)
         {
-            var project =await _unit.Projects.GetByIdAsync(projectDto.Id);
-            _unit.Projects.Delete(project);
-            _unit.SaveAsync();
+            using(var unit = _unitFactory())
+            {
+                var project = MapFromDto(projectDto);
+                unit.Projects.Delete(project);
+                await unit.SaveAsync();
+            }
         }
 
         private Project MapFromDto(ProjectDto projectDto)

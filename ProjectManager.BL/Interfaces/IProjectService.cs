@@ -8,8 +8,8 @@ namespace ProjectManager.BL.Interfaces
     public interface IProjectService
     {
         Task<IEnumerable<ProjectDto>> GetByUserIdAsync(int userId);
-        void UpdateProject(ProjectDto project);
-        void DeleteProject(ProjectDto project);
-        void CreateProject(ProjectDto project);
+        Task UpdateProjectAsync(ProjectDto project);
+        Task DeleteProjectAsync(ProjectDto project);
+        Task CreateProjectAsync(ProjectDto project);
     }
 }

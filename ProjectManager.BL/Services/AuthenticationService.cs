@@ -11,24 +11,27 @@ namespace ProjectManager.BL.Services
 {
     public class AuthenticationService: IAuthenticationService
     {
-        private IUnitOfWork _unit;
+        private Func<IUnitOfWork> _unitFactory;
 
-        public AuthenticationService(IUnitOfWork unit)
+        public AuthenticationService(Func<IUnitOfWork> unitFactory)
         {
-            _unit = unit;
+            _unitFactory = unitFactory;
         }
 
         public async Task<UserDto> AuthorizeAsync(string name, string password)
         {
             User user;
 
-            try
+            using(var unit = _unitFactory())
             {
-                user = await _unit.Users.GetWithProjectsAsync(u => u.Name == name && u.Password == password);
-            }
-            catch
-            {
-                throw new Exception();
+                try
+                {
+                    user = await unit.Users.GetWithProjectsAsync(u => u.Name == name && u.Password == password);
+                }
+                catch
+                {
+                    throw new Exception();
+                }
             }
 
             return MapToDto(user);
@@ -36,13 +39,16 @@ namespace ProjectManager.BL.Services
 
         public async Task RegisterAsync(string name, string password)
         {
-            if ((await _unit.Users.GetAsync(u => u.Name == name)).FirstOrDefault() == null)
+            using(var unit = _unitFactory())
             {
-                _unit.Users.Add(new User() {Name = name, Password = password});
-                await _unit.SaveAsync();
+                if ((await unit.Users.GetAsync(u => u.Name == name)).FirstOrDefault() == null)
+                {
+                    unit.Users.Add(new User() { Name = name, Password = password });
+                    await unit.SaveAsync();
+                }
+                else
+                    throw new TakenNameException();
             }
-            else
-                throw new TakenNameException();
         }
 
         private UserDto MapToDto(User user)

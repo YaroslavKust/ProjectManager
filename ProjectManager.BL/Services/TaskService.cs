@@ -12,43 +12,62 @@ namespace ProjectManager.BL.Services
 {
     public class TaskService: ITaskService
     {
-        private IUnitOfWork _unit;
+        private Func<IUnitOfWork> _unitFactory;
 
-        public TaskService(IUnitOfWork unit)
+        public TaskService(Func<IUnitOfWork> unitFactory)
         {
-            _unit = unit;
+            _unitFactory = unitFactory;
         }
 
         public async Task<IEnumerable<TaskDto>> GetTasksAsync(Func<TaskDto, bool> f)
         {
-            var tsks = await _unit.Tasks.GetAsync(t => true);
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<MyTask, TaskDto>());
-            var mapper = config.CreateMapper();
-            var tasks = mapper.Map<List<TaskDto>>(tsks);
-            var res = tasks.Where(f);
+            IEnumerable<TaskDto> res;
+
+            using (var unit = _unitFactory())
+            {
+                var tsks = await unit.Tasks.GetAsync(t => true);
+                var config = new MapperConfiguration(cfg => cfg.CreateMap<MyTask, TaskDto>());
+                var mapper = config.CreateMapper();
+                var tasks = mapper.Map<List<TaskDto>>(tsks);
+                res = tasks.Where(f);
+            }
+
             return res;
         }
 
-        public void CreateTask(TaskDto task)
+        public async Task CreateTaskAsync(TaskDto task)
         {
             var myTask = MapFromDto(task);
-            _unit.Tasks.Add(myTask);
-            _unit.SaveAsync();
+
+            using(var unit = _unitFactory())
+            {
+                unit.Tasks.Add(myTask);
+                await unit.SaveAsync();
+            } 
         }
 
-        public void UpdateTask(TaskDto task)
+        public async Task UpdateTaskAsync(TaskDto task)
         {
             var myTask = MapFromDto(task);
-            _unit.Tasks.Update(myTask);
-            _unit.SaveAsync();
+
+            using(var unit = _unitFactory())
+            {
+                unit.Tasks.Update(myTask);
+                await unit.SaveAsync();
+            }
+            
         }
 
-        public async void DeleteTask(TaskDto task)
+        public async Task DeleteTaskAsync(TaskDto task)
         {
             var myTask = MapFromDto(task);
-            var t = await _unit.Tasks.GetByIdAsync(myTask.Id);
-            _unit.Tasks.Delete(t);
-            _unit.SaveAsync();
+
+            using(var unit = _unitFactory())
+            {
+                var t = await unit.Tasks.GetByIdAsync(myTask.Id);
+                unit.Tasks.Delete(t);
+                await unit.SaveAsync();
+            }
         }
 
         private MyTask MapFromDto(TaskDto taskDto)

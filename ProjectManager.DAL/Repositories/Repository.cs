@@ -25,21 +25,19 @@ namespace ProjectManager.DAL.Repositories
         public async Task<IEnumerable<T>> GetAsync(Expression<Func<T, bool>> expression = null)
         {
             return await Task.Run(() => 
-                expression == null ? _dataSet.AsNoTracking().AsEnumerable() : _dataSet.Where(expression).AsNoTracking().AsEnumerable());
+                expression == null ?
+                _dataSet.AsNoTracking().AsEnumerable() : _dataSet.Where(expression).AsNoTracking().AsEnumerable());
         }
 
         public void Add(T entity)
         {
             _dataSet.Add(entity);
-            _context.SaveChanges();
-            _context.Entry(entity).State = EntityState.Detached;
         }
 
         public void Update(T entity)
         {
+            _dataSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
-            _context.Entry(entity).State = EntityState.Detached;
         }
 
         public void Delete(T entity) 

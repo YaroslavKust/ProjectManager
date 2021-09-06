@@ -84,7 +84,7 @@ namespace ProjectManager.UI.ViewModels
                     if(projectSettings.ShowDialog() == true)
                     {
                         p.UserId = _user.Id;
-                        _projectService.CreateProject(p);
+                        await _projectService.CreateProjectAsync(p);
                         Projects = new ObservableCollection<ProjectDto>(await _projectService.GetByUserIdAsync(_user.Id));
                     }
                 }));
@@ -95,7 +95,7 @@ namespace ProjectManager.UI.ViewModels
         {
             get
             {
-                return _updateProject ?? (_updateProject = new RelayCommand(_ =>
+                return _updateProject ?? (_updateProject = new RelayCommand(async _ =>
                 {
                     if (SelectedProject == null)
                     {
@@ -106,7 +106,7 @@ namespace ProjectManager.UI.ViewModels
                     var projectSettings = new ProjectSettingsWindow(SelectedProject);
                     projectSettings.ShowDialog();
                     if (projectSettings.DialogResult == true)
-                        _projectService.UpdateProject(SelectedProject);
+                       await _projectService.UpdateProjectAsync(SelectedProject);
                 }
                 ));
             }
@@ -116,7 +116,7 @@ namespace ProjectManager.UI.ViewModels
         {
             get
             {
-                return _deleteProject ?? (_deleteProject = new RelayCommand(_ =>
+                return _deleteProject ?? (_deleteProject = new RelayCommand(async _ =>
                 {
                     if (SelectedProject == null)
                     {
@@ -126,7 +126,7 @@ namespace ProjectManager.UI.ViewModels
 
                     if (_messenger.SendConfirmMessage(Properties.Resources.DelRecordConfirm))
                     {
-                        _projectService.DeleteProject(SelectedProject);
+                        await _projectService.DeleteProjectAsync(SelectedProject);
                         Projects.Remove(SelectedProject);
                     }
                 }));
@@ -151,7 +151,7 @@ namespace ProjectManager.UI.ViewModels
                         if(taskSettings.ShowDialog() == true) 
                         {
                             t.ProjectId = CurrentProject.Id;
-                            _taskService.CreateTask(t);
+                            await _taskService.CreateTaskAsync(t);
                             CurrentProject.Tasks =
                             new ObservableCollection<TaskDto>
                             (await _taskService.GetTasksAsync(ts => ts.ProjectId == CurrentProject.Id));
@@ -176,7 +176,7 @@ namespace ProjectManager.UI.ViewModels
                     var taskSettings = new TaskSettingsWindow(SelectedTask);
                     taskSettings.ShowDialog();
                     if (taskSettings.DialogResult == true)
-                        _taskService.UpdateTask(SelectedTask);
+                        _taskService.UpdateTaskAsync(SelectedTask);
                 }
                 ));
             }
@@ -186,7 +186,7 @@ namespace ProjectManager.UI.ViewModels
         {
             get
             {
-                return _removeTask ?? (_removeTask = new RelayCommand(_ =>
+                return _removeTask ?? (_removeTask = new RelayCommand(async _ =>
                 {
                     if (SelectedTask == null)
                     {
@@ -196,7 +196,7 @@ namespace ProjectManager.UI.ViewModels
 
                     if(_messenger.SendConfirmMessage(Properties.Resources.DelRecordConfirm))
                     {
-                        _taskService.DeleteTask(SelectedTask);
+                        await _taskService.DeleteTaskAsync(SelectedTask);
                         CurrentProject.Tasks.Remove(SelectedTask);
                     }   
                 }));
