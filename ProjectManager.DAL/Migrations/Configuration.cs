@@ -1,17 +1,18 @@
-﻿using System.Data.Entity.Migrations;
-using ProjectManager.DAL.Models;
-
-namespace ProjectManager.DAL.Migrations
+﻿namespace ProjectManager.DAL.Migrations
 {
-    internal sealed class Configuration : DbMigrationsConfiguration<ManagerContext>
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<ProjectManager.DAL.Models.ManagerContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "ProjectManager.Models.ManagerContext";
+            AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(ManagerContext context)
+        protected override void Seed(ProjectManager.DAL.Models.ManagerContext context)
         {
             //  This method will be called after migrating to the latest version.
 

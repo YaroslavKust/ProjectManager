@@ -51,21 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202108161133263_InitialCreate.cs" />
-    <Compile Include="Migrations\202108161133263_InitialCreate.Designer.cs">
-      <DependentUpon>202108161133263_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108161226454_adduser.cs" />
-    <Compile Include="Migrations\202108161226454_adduser.Designer.cs">
-      <DependentUpon>202108161226454_adduser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202108301203184_updateTask.cs" />
-    <Compile Include="Migrations\202108301203184_updateTask.designer.cs">
-      <DependentUpon>202108301203184_updateTask.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202109031305188_reformatTasks.cs" />
-    <Compile Include="Migrations\202109031305188_reformatTasks.designer.cs">
-      <DependentUpon>202109031305188_reformatTasks.cs</DependentUpon>
+    <Compile Include="Migrations\202109121309413_init.cs" />
+    <Compile Include="Migrations\202109121309413_init.designer.cs">
+      <DependentUpon>202109121309413_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ManagerContext.cs" />
@@ -83,22 +71,13 @@
     <Compile Include="UnitOfWorks\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202108161133263_InitialCreate.resx">
-      <DependentUpon>202108161133263_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108161226454_adduser.resx">
-      <DependentUpon>202108161226454_adduser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202108301203184_updateTask.resx">
-      <DependentUpon>202108301203184_updateTask.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202109031305188_reformatTasks.resx">
-      <DependentUpon>202109031305188_reformatTasks.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202109121309413_init.resx">
+      <DependentUpon>202109121309413_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
