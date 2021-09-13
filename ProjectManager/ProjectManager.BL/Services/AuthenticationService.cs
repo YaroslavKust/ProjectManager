@@ -24,7 +24,14 @@ namespace ProjectManager.BL.Services
 
             using(var unit = _unitFactory())
             {
-                user = await unit.Users.GetWithProjectsAsync(u => u.Name == name && u.Password == password);
+                try
+                {
+                    user = await unit.Users.GetWithProjectsAsync(u => u.Name == name && u.Password == password);
+                }
+                catch
+                {
+                    throw new Exception();
+                }
             }
 
             return MapToDto(user);

@@ -1,7 +1,6 @@
 ﻿using Ninject.Modules;
-using ProjectManager.DAL.Models;
+using ProjectManager.BL.Interfaces;
 using ProjectManager.DAL.UnitOfWorks;
-using System.Data.Entity;
 
 namespace ProjectManager.BL.Infrastructure
 {
@@ -9,7 +8,6 @@ namespace ProjectManager.BL.Infrastructure
     {
         public override void Load()
         {
-            Bind<DbContext>().To<ManagerContext>();
             Bind<IUnitOfWork>().To<UnitOfWork>().InTransientScope();
         }
     }

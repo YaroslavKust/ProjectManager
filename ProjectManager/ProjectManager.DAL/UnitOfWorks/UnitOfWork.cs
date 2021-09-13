@@ -1,7 +1,7 @@
-﻿using ProjectManager.DAL.Models;
-using ProjectManager.DAL.Repositories;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Threading.Tasks;
+using ProjectManager.DAL.Models;
+using ProjectManager.DAL.Repositories;
 
 namespace ProjectManager.DAL.UnitOfWorks
 {
@@ -13,9 +13,9 @@ namespace ProjectManager.DAL.UnitOfWorks
 
         private readonly DbContext _db;
 
-        public UnitOfWork(DbContext db)
+        public UnitOfWork()
         {
-            _db = db;
+            _db = new ManagerContext();
         }
 
         public IUserRepository Users => _users ?? (_users = new UserRepository(_db));
