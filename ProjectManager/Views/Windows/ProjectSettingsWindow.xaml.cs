@@ -1,4 +1,5 @@
-﻿using ProjectManager.BL.DTO;
+﻿using MahApps.Metro.Controls;
+using ProjectManager.BL.DTO;
 using System.Windows;
 
 namespace ProjectManager.UI.Views
@@ -6,7 +7,7 @@ namespace ProjectManager.UI.Views
     /// <summary>
     /// Логика взаимодействия для ProjectSettingsWindow.xaml
     /// </summary>
-    public partial class ProjectSettingsWindow : Window
+    public partial class ProjectSettingsWindow : MetroWindow
     {
         public ProjectSettingsWindow(ProjectDto project)
         {

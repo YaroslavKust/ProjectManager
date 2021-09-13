@@ -44,6 +44,7 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="{Binding CurrentProject.Name}"
+                               Margin="2"
                                Grid.Column="0" Grid.Row="0" 
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center"

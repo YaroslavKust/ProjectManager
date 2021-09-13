@@ -1,4 +1,5 @@
-﻿using ProjectManager.BL.DTO;
+﻿using MahApps.Metro.Controls;
+using ProjectManager.BL.DTO;
 using System.Collections.Generic;
 using System.Windows;
 
@@ -7,7 +8,7 @@ namespace ProjectManager.UI.Views
     /// <summary>
     /// Логика взаимодействия для TaskSettingsWindow.xaml
     /// </summary>
-    public partial class TaskSettingsWindow : Window
+    public partial class TaskSettingsWindow : MetroWindow
     {
         public List<int> Progress { get; set; }
         public TaskDto Task { get; set; }
