@@ -61,6 +61,15 @@ namespace ProjectManager.UI.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Cansel.
+        /// </summary>
+        public static string Cansel {
+            get {
+                return ResourceManager.GetString("Cansel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Choose record.
         /// </summary>
         public static string ChooseRecord {
@@ -147,6 +156,15 @@ namespace ProjectManager.UI.Properties {
         public static string NewProject {
             get {
                 return ResourceManager.GetString("NewProject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         

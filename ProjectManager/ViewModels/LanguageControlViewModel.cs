@@ -34,7 +34,7 @@ namespace ProjectManager.UI.ViewModels
             _selectedLang = info;
             LanguageManager.Language = info;
 
-            if (await _messenger.SendConfirmMessage(Properties.Resources.RestartAppConfirm))
+            if (await _messenger.SendConfirmMessageAsync(Properties.Resources.RestartAppConfirm))
             {
                 Process.Start(Process.GetCurrentProcess().MainModule.FileName);
                 Application.Current.Shutdown();

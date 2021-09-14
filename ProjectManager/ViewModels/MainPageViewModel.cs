@@ -120,7 +120,7 @@ namespace ProjectManager.UI.ViewModels
                         return;
                     }
 
-                    if (await _messenger.SendConfirmMessage(Properties.Resources.DelRecordConfirm))
+                    if (await _messenger.SendConfirmMessageAsync(Properties.Resources.DelRecordConfirm))
                     {
                         await _projectService.DeleteProjectAsync(SelectedProject);
                         Projects.Remove(SelectedProject);
@@ -190,7 +190,7 @@ namespace ProjectManager.UI.ViewModels
                         return;
                     }
 
-                    if(await _messenger.SendConfirmMessage(Properties.Resources.DelRecordConfirm))
+                    if(await _messenger.SendConfirmMessageAsync(Properties.Resources.DelRecordConfirm))
                     {
                         await _taskService.DeleteTaskAsync(SelectedTask);
                         CurrentProject.Tasks.Remove(SelectedTask);
