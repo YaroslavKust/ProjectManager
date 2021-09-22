@@ -12,8 +12,8 @@
         Closed="MainWindow_OnClosed">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="7*"/>
-            <RowDefinition Height="90*"/>
+            <RowDefinition MaxHeight="40"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <uc:LanguageControl Width="100"
                             Margin="5"
