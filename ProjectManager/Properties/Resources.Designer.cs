@@ -106,6 +106,24 @@ namespace ProjectManager.UI.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Project name cannot be empty.
+        /// </summary>
+        public static string EmptyProjectName {
+            get {
+                return ResourceManager.GetString("EmptyProjectName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Description is empty!.
+        /// </summary>
+        public static string EmptyTaskDescription {
+            get {
+                return ResourceManager.GetString("EmptyTaskDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Enter.
         /// </summary>
         public static string Enter {
@@ -219,6 +237,15 @@ namespace ProjectManager.UI.Properties {
         public static string Registration {
             get {
                 return ResourceManager.GetString("Registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Required field.
+        /// </summary>
+        public static string RequiredField {
+            get {
+                return ResourceManager.GetString("RequiredField", resourceCulture);
             }
         }
         

@@ -132,6 +132,12 @@
   <data name="DifferentPasswords" xml:space="preserve">
     <value>Пароли не совпадают</value>
   </data>
+  <data name="EmptyProjectName" xml:space="preserve">
+    <value>Имя проекта не может быть пустым!</value>
+  </data>
+  <data name="EmptyTaskDescription" xml:space="preserve">
+    <value>Пустое описание задачи!</value>
+  </data>
   <data name="Enter" xml:space="preserve">
     <value>Вход</value>
   </data>
@@ -170,6 +176,9 @@
   </data>
   <data name="Registration" xml:space="preserve">
     <value>Регистрация</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Обязательное поле</value>
   </data>
   <data name="RestartAppConfirm" xml:space="preserve">
     <value>Изменения вступят в силу при следующем запуске приложения. Хотите перезапустить его прямо сейчас?</value>

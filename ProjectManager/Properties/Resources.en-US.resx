@@ -132,6 +132,12 @@
   <data name="DifferentPasswords" xml:space="preserve">
     <value>Password missmatch</value>
   </data>
+  <data name="EmptyProjectName" xml:space="preserve">
+    <value>Project name cannot be empty</value>
+  </data>
+  <data name="EmptyTaskDescription" xml:space="preserve">
+    <value>Description cannot be empty</value>
+  </data>
   <data name="Enter" xml:space="preserve">
     <value>Enter</value>
   </data>
@@ -170,6 +176,9 @@
   </data>
   <data name="Registration" xml:space="preserve">
     <value>Registration</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>Required field</value>
   </data>
   <data name="RestartAppConfirm" xml:space="preserve">
     <value>Changes will be confirmed at next start of application. Do you want restart it right now?</value>
