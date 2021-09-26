@@ -1,15 +1,18 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows;
 using Ninject;
 using ProjectManager.BL.DTO;
 using ProjectManager.BL.Interfaces;
 using ProjectManager.UI.Common;
 using ProjectManager.UI.Views;
+using ProjectManager.UI.Views.Pages;
 
 namespace ProjectManager.UI.ViewModels
 {
     public class MainPageViewModel: BaseViewModel
     {
         private UserDto _user;
+        private MainWindow _window;
 
         private IProjectService _projectService;
         private ITaskService _taskService;
@@ -26,6 +29,7 @@ namespace ProjectManager.UI.ViewModels
             _taskService = App.Container.Get<ITaskService>();
             _messenger = App.Container.Get<IMessenger>();
             _user = user;
+            _window = Application.Current.MainWindow as MainWindow;
             Projects = _user.Projects;
         }
 
@@ -73,16 +77,14 @@ namespace ProjectManager.UI.ViewModels
         {
             get
             {
-                return _addProject ?? (_addProject = new RelayCommand(async _ =>
+                return _addProject ?? (_addProject = new RelayCommand( _ =>
                 {
                     var p = new ProjectDto();
-                    var projectSettings = new ProjectSettingsWindow(p);
-                    if(projectSettings.ShowDialog() == true)
-                    {
-                        p.UserId = _user.Id;
-                        await _projectService.CreateProjectAsync(p);
-                        Projects = new ObservableCollection<ProjectDto>(await _projectService.GetByUserIdAsync(_user.Id));
-                    }
+                    var projectSettings = new ProjectSettings();
+                    var settings = new CreateProjectViewModel(p);
+                    projectSettings.DataContext = settings;
+
+                    _window?.Frame.Navigate(projectSettings);
                 }));
             }
         }
@@ -91,7 +93,7 @@ namespace ProjectManager.UI.ViewModels
         {
             get
             {
-                return _updateProject ?? (_updateProject = new RelayCommand(async _ =>
+                return _updateProject ?? (_updateProject = new RelayCommand( _ =>
                 {
                     if (SelectedProject == null)
                     {
@@ -99,10 +101,11 @@ namespace ProjectManager.UI.ViewModels
                         return;
                     }
 
-                    var projectSettings = new ProjectSettingsWindow(SelectedProject);
-                    projectSettings.ShowDialog();
-                    if (projectSettings.DialogResult == true)
-                       await _projectService.UpdateProjectAsync(SelectedProject);
+                    var projectSettings = new ProjectSettings();
+                    var settings = new UpdateProjectViewModel(SelectedProject);
+                    projectSettings.DataContext = settings;
+
+                    _window?.Frame.Navigate(projectSettings);
                 }
                 ));
             }
@@ -141,17 +144,9 @@ namespace ProjectManager.UI.ViewModels
                             return;
                         }
 
-                        var t = new TaskDto();
-                        var taskSettings = new TaskSettingsWindow(t);
+                        var createTaskViewModel = new CreateTaskViewModel(CurrentProject.Id);
 
-                        if(taskSettings.ShowDialog() == true) 
-                        {
-                            t.ProjectId = CurrentProject.Id;
-                            await _taskService.CreateTaskAsync(t);
-                            CurrentProject.Tasks =
-                            new ObservableCollection<TaskDto>
-                            (await _taskService.GetTasksAsync(ts => ts.ProjectId == CurrentProject.Id));
-                        } 
+                        _window?.Frame.Navigate(new CreateTask(createTaskViewModel));
                     }
                 ));
             }
@@ -169,10 +164,9 @@ namespace ProjectManager.UI.ViewModels
                         return;
                     }
 
-                    var taskSettings = new TaskSettingsWindow(SelectedTask);
-                    taskSettings.ShowDialog();
-                    if (taskSettings.DialogResult == true)
-                        _taskService.UpdateTaskAsync(SelectedTask);
+                    var updateTaskViewModel = new UpdateTaskViewModel(SelectedTask);
+
+                    _window?.Frame.Navigate(new UpdateTask(updateTaskViewModel));
                 }
                 ));
             }

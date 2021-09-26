@@ -43,7 +43,9 @@ namespace ProjectManager.BL.Services
             {
                 unit.Tasks.Add(myTask);
                 await unit.SaveAsync();
-            } 
+            }
+
+            task.Id = myTask.Id;
         }
 
         public async Task UpdateTaskAsync(TaskDto task)

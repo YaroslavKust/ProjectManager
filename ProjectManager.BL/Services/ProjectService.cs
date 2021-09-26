@@ -56,6 +56,8 @@ namespace ProjectManager.BL.Services
                 unit.Projects.Add(project);
                 await unit.SaveAsync();
             }
+
+            projectDto.Id = project.Id;
         }
 
         public async Task DeleteProjectAsync(ProjectDto projectDto)

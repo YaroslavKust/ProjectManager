@@ -4,9 +4,6 @@ using System.Windows.Controls;
 
 namespace ProjectManager.UI.Views.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для MainPage.xaml
-    /// </summary>
     public partial class MainPage : Page
     {
         public MainPage(UserDto user)

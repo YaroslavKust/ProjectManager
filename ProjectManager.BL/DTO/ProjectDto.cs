@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProjectManager.BL.DTO
 {
-    public class ProjectDto : NotifyObject
+    public class ProjectDto : PropertyValidateModel
     {
         private string _name;
         private ObservableCollection<TaskDto> tasks;
@@ -11,6 +12,7 @@ namespace ProjectManager.BL.DTO
         public int Id { get; set; }
         public int UserId { get; set; }
 
+        [Required]
         public string Name
         {
             get => _name;

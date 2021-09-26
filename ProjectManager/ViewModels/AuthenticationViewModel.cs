@@ -53,6 +53,7 @@ namespace ProjectManager.UI.ViewModels
                 return;
             }
 
+            App.User = user;
             var win = (MainWindow)Application.Current.MainWindow;
             win.Frame.Navigate(new MainPage(user));
         }

@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using ProjectManager.DAL.Models;
 
 namespace ProjectManager.BL.DTO
 {
-    public class TaskDto: NotifyObject
+    public class TaskDto: PropertyValidateModel
     {
         private string _description;
         private int _progressInPercents;
@@ -13,6 +14,7 @@ namespace ProjectManager.BL.DTO
 
         public int ProjectId { get; set; }
 
+        [Required]
         public string Description
         {
             get => _description;

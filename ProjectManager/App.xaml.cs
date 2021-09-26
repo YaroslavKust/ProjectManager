@@ -9,11 +9,14 @@ using ProjectManager.BL.Infrastructure;
 using ProjectManager.UI.Util;
 using ProjectManager.UI.ViewModels;
 using ProjectManager.UI.Views;
+using ProjectManager.UI.Views.Pages;
 
 namespace ProjectManager.UI
 {
     public partial class App : Application
     {
+        public static UserDto User { get; set; }
+
         private IKernel _container;
         public static IKernel Container { get; private set; }
 
@@ -26,8 +29,6 @@ namespace ProjectManager.UI
 
         private void ConfigureContainer()
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings["DBConnection"].ConnectionString;
-
             var serviceModule = new ServiceModule();
             var unitModule = new UnitModule();
 
@@ -36,7 +37,7 @@ namespace ProjectManager.UI
 
             var window = _container.Get<MainWindow>();
             var a = new MainWindow();
-            window.Frame.Source = new Uri("../Pages/Authentication.xaml", UriKind.Relative);
+            window.Frame.Navigate(new Authentication());
             Current.MainWindow = window;
         }
     }

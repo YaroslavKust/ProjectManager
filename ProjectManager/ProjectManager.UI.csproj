@@ -91,9 +91,13 @@
     <Compile Include="Common\IMessenger.cs" />
     <Compile Include="Common\LanguageManager.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\CreateTaskViewModel.cs" />
     <Compile Include="ViewModels\LanguageControlViewModel.cs" />
     <Compile Include="ViewModels\MainPageViewModel.cs" />
+    <Compile Include="ViewModels\CreateProjectViewModel.cs" />
     <Compile Include="ViewModels\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\UpdateProjectViewModel.cs" />
+    <Compile Include="ViewModels\UpdateTaskViewModel.cs" />
     <Compile Include="Views\Helpers\PasswordHelper.cs" />
     <Compile Include="Util\ServiceModule.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
@@ -103,14 +107,20 @@
     <Compile Include="Views\Pages\Authentication.xaml.cs">
       <DependentUpon>Authentication.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\CreateTask.xaml.cs">
+      <DependentUpon>CreateTask.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\ProjectSettings.xaml.cs">
+      <DependentUpon>ProjectSettings.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Windows\ProjectSettingsWindow.xaml.cs">
-      <DependentUpon>ProjectSettingsWindow.xaml</DependentUpon>
+    <Compile Include="Views\Pages\UpdateTask.xaml.cs">
+      <DependentUpon>UpdateTask.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\TaskSettingsWindow.xaml.cs">
       <DependentUpon>TaskSettingsWindow.xaml</DependentUpon>
@@ -123,11 +133,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\CreateTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\ProjectSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\Registration.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\UpdateTask.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,10 +165,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Windows\ProjectSettingsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Windows\TaskSettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
