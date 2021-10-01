@@ -7,7 +7,7 @@ namespace ProjectManager.BL.DTO
     public class ProjectDto : PropertyValidateModel
     {
         private string _name;
-        private ObservableCollection<TaskDto> tasks;
+        private ObservableCollection<TaskDto> _tasks = new ObservableCollection<TaskDto>();
 
         public int Id { get; set; }
         public int UserId { get; set; }
@@ -25,10 +25,10 @@ namespace ProjectManager.BL.DTO
 
         public ObservableCollection<TaskDto> Tasks 
         { 
-            get => tasks; 
+            get => _tasks; 
             set
             {
-                tasks = value;
+                _tasks = value;
                 OnPropertyChanged(nameof(Tasks));
             }
         }
